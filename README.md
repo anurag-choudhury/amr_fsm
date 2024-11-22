@@ -1,1 +1,2 @@
 # amr_fsm
+test
