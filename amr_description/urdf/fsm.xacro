@@ -1,0 +1,762 @@
+<?xml version="1.0" ?>
+<robot name="fsm" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:include filename="$(find amr_description)/urdf/materials.xacro" />
+<xacro:include filename="$(find amr_description)/urdf/fsm.trans" />
+<xacro:include filename="$(find amr_description)/urdf/fsm.gazebo" />
+<link name="base_link">
+  <inertial>
+    <origin xyz="0.00021937921140926782 0.0006448449269138356 0.03237735916535951" rpy="0 0 0"/>
+    <mass value="64.57454773268577"/>
+    <inertia ixx="4.824191" iyy="2.582973" izz="6.484906" ixy="0.00112" iyz="-0.107302" ixz="0.001695"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amr_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amr_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="motor_right_1">
+  <inertial>
+    <origin xyz="0.01130470526555527 -0.06556668434295745 -0.10047077089070608" rpy="0 0 0"/>
+    <mass value="7.531128321328023"/>
+    <inertia ixx="0.018628" iyy="0.0301" izz="0.027239" ixy="-2.4e-05" iyz="1.5e-05" ixz="0.000857"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.2 -0.103 -0.0201" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amr_description/meshes/motor_right_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="dark_grey"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.2 -0.103 -0.0201" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amr_description/meshes/motor_right_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="motor_left_1">
+  <inertial>
+    <origin xyz="-0.011304705265915288 -0.06543331565702307 -0.10047077109165434" rpy="0 0 0"/>
+    <mass value="7.531128321328023"/>
+    <inertia ixx="0.018628" iyy="0.0301" izz="0.027239" ixy="-2.4e-05" iyz="-1.5e-05" ixz="-0.000857"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.2 -0.103 -0.0201" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amr_description/meshes/motor_left_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="dark_grey"/>
+  </visual>
+  <collision>
+    <origin xyz="0.2 -0.103 -0.0201" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amr_description/meshes/motor_left_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="tyre_right_1">
+  <inertial>
+    <origin xyz="-0.019000000000200634 1.2791850911852976e-13 2.605335669425557e-10" rpy="0 0 0"/>
+    <mass value="2.591613190179594"/>
+    <inertia ixx="0.012158" iyy="0.006383" izz="0.006383" ixy="0.0" iyz="-0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.2802 -0.0375 0.089" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amr_description/meshes/tyre_right_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="black"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.2802 -0.0375 0.089" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amr_description/meshes/tyre_right_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="tyre_left_1">
+  <inertial>
+    <origin xyz="0.018999999999829598 -1.7047474543119279e-13 5.966924176981081e-11" rpy="0 0 0"/>
+    <mass value="2.591613190179594"/>
+    <inertia ixx="0.012158" iyy="0.006383" izz="0.006383" ixy="0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.2802 -0.0375 0.089" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amr_description/meshes/tyre_left_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="black"/>
+  </visual>
+  <collision>
+    <origin xyz="0.2802 -0.0375 0.089" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amr_description/meshes/tyre_left_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="lidar_base_1">
+  <inertial>
+    <origin xyz="4.768181757717922e-05 -0.005256974355106858 0.03580381017503936" rpy="0 0 0"/>
+    <mass value="4.836430449027258"/>
+    <inertia ixx="0.007444" iyy="0.007198" izz="0.006903" ixy="-2e-06" iyz="-2.6e-05" ixz="-1e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="1e-05 -0.2705 -0.1207" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amr_description/meshes/lidar_base_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="black"/>
+  </visual>
+  <collision>
+    <origin xyz="1e-05 -0.2705 -0.1207" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amr_description/meshes/lidar_base_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="top_link_1">
+  <inertial>
+    <origin xyz="0.2779849514157832 -0.3701249999590413 0.01500000026070139" rpy="0 0 0"/>
+    <mass value="7.533115445241179"/>
+    <inertia ixx="0.591736" iyy="0.390341" izz="0.980677" ixy="-0.0" iyz="-0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.27891 -0.3506 -0.2468" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amr_description/meshes/top_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="dark_grey"/>
+  </visual>
+  <collision>
+    <origin xyz="0.27891 -0.3506 -0.2468" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amr_description/meshes/top_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="depth_mount_1">
+  <inertial>
+    <origin xyz="0.05017292442270728 0.002500000000228153 1.4533467485033924e-10" rpy="0 0 0"/>
+    <mass value="0.056911910619412975"/>
+    <inertia ixx="1e-06" iyy="4.9e-05" izz="4.8e-05" ixy="-0.0" iyz="0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.050172 -0.3185 -0.051575" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amr_description/meshes/depth_mount_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.050172 -0.3185 -0.051575" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amr_description/meshes/depth_mount_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+<link name="depth_camera_1">
+  <inertial>
+    <origin xyz="4.543498336883556e-07 0.03717016930855388 -4.819993119922761e-05" rpy="0 0 0"/>
+    <mass value="0.3783774808035141"/>
+    <inertia ixx="3.5e-05" iyy="0.000238" izz="0.00024" ixy="0.0" iyz="0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.0031 -0.3484 -0.05225" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amr_description/meshes/depth_camera_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="dark_grey"/>
+  </visual>
+  <collision>
+    <origin xyz="-1e-06 -0.3484 -0.04435" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amr_description/meshes/depth_camera_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="depth_frame_1">
+  <inertial>
+    <origin xyz="-7.557736728347379e-08 0.0005000000002279847 1.453353132285784e-10" rpy="0 0 0"/>
+    <mass value="0.009731724406093477"/>
+    <inertia ixx="0.0" iyy="5e-06" izz="5e-06" ixy="0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-1e-06 -0.3484 -0.04435" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amr_description/meshes/depth_frame_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="black"/>
+  </visual>
+  <collision>
+    <origin xyz="-1e-06 -0.3484 -0.04435" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amr_description/meshes/depth_frame_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="back_glass_1">
+  <inertial>
+    <origin xyz="0.004598362970281962 -0.002500106780956357 0.017821727347436714" rpy="0 0 0"/>
+    <mass value="0.7009163737605585"/>
+    <inertia ixx="8e-05" iyy="0.016509" izz="0.016432" ixy="-0.0" iyz="0.0" ixz="-4e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="1e-05 0.370957 -0.1098" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amr_description/meshes/back_glass_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="translucent"/>
+  </visual>
+  <collision>
+    <origin xyz="1e-05 0.370957 -0.1098" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amr_description/meshes/back_glass_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="left_glass_1">
+  <inertial>
+    <origin xyz="-0.003000106781443246 4.084083517306991e-05 0.02058617655376159" rpy="0 0 0"/>
+    <mass value="1.3318122699882444"/>
+    <inertia ixx="0.052988" iyy="0.00019" izz="0.052806" ixy="-0.0" iyz="-2e-06" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.266467 0.0195 -0.1098" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amr_description/meshes/left_glass_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="translucent"/>
+  </visual>
+  <collision>
+    <origin xyz="0.266467 0.0195 -0.1098" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amr_description/meshes/left_glass_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="right_glass_1">
+  <inertial>
+    <origin xyz="0.003000311861683258 4.0840835175939144e-05 0.020586176553751792" rpy="0 0 0"/>
+    <mass value="1.3318122699882444"/>
+    <inertia ixx="0.052988" iyy="0.00019" izz="0.052806" ixy="-0.0" iyz="-2e-06" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.26737 0.0195 -0.1098" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amr_description/meshes/right_glass_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="translucent"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.26737 0.0195 -0.1098" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amr_description/meshes/right_glass_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="front_glass_1">
+  <inertial>
+    <origin xyz="-0.0024330959724907382 0.002500311862175697 0.017918825241521594" rpy="0 0 0"/>
+    <mass value="0.7337332732308007"/>
+    <inertia ixx="8.2e-05" iyy="0.017149" izz="0.017071" ixy="-0.0" iyz="0.0" ixz="9e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="1e-05 -0.33288 -0.1098" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amr_description/meshes/front_glass_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="translucent"/>
+  </visual>
+  <collision>
+    <origin xyz="1e-05 -0.33288 -0.1098" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amr_description/meshes/front_glass_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="base_sheet_1">
+  <inertial>
+    <origin xyz="-0.16864000000013094 -0.010041376475902933 0.0556516123296053" rpy="0 0 0"/>
+    <mass value="3.1276045223949858"/>
+    <inertia ixx="0.031468" iyy="0.036973" izz="0.068262" ixy="-0.0" iyz="-1e-06" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.17 0.0595 -0.0061" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amr_description/meshes/base_sheet_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="dark_grey"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.17 0.0595 -0.0061" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amr_description/meshes/base_sheet_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="e_stop_1">
+  <inertial>
+    <origin xyz="-0.0001061545618955273 0.001970339556248424 -0.0008968258607721102" rpy="0 0 0"/>
+    <mass value="0.06273786707033309"/>
+    <inertia ixx="1.1e-05" iyy="3e-06" izz="1.1e-05" ixy="0.0" iyz="1e-06" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.14477 0.375957 -0.13263" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amr_description/meshes/e_stop_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="dark_red"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.14477 0.375957 -0.13263" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amr_description/meshes/e_stop_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="selector_switch_1">
+  <inertial>
+    <origin xyz="-6.931421539752014e-05 -0.010796094428947356 -0.009500236065773437" rpy="0 0 0"/>
+    <mass value="0.05079379605303089"/>
+    <inertia ixx="9e-06" iyy="3e-06" izz="9e-06" ixy="0.0" iyz="-0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.092448 0.373457 -0.140316" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amr_description/meshes/selector_switch_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="black"/>
+  </visual>
+  <collision>
+    <origin xyz="0.092448 0.373457 -0.140316" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amr_description/meshes/selector_switch_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="selector_switch__1__1">
+  <inertial>
+    <origin xyz="-6.947047272723439e-05 -0.010796094428947467 -0.009500236065773743" rpy="0 0 0"/>
+    <mass value="0.05079379605303089"/>
+    <inertia ixx="9e-06" iyy="3e-06" izz="9e-06" ixy="0.0" iyz="-0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.172358 0.373457 -0.139816" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amr_description/meshes/selector_switch__1__1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="black"/>
+  </visual>
+  <collision>
+    <origin xyz="0.172358 0.373457 -0.139816" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amr_description/meshes/selector_switch__1__1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="upper_glass_1">
+  <inertial>
+    <origin xyz="0.28199999369655 -0.3701249917268671 0.0034885803244198432" rpy="0 0 0"/>
+    <mass value="22.832196648157478"/>
+    <inertia ixx="1.038441" iyy="0.602082" izz="1.640337" ixy="-0.0" iyz="-0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.28301 -0.3506 -0.2768" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amr_description/meshes/upper_glass_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="translucent"/>
+  </visual>
+  <collision>
+    <origin xyz="0.28301 -0.3506 -0.2768" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amr_description/meshes/upper_glass_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="lower_glass_1">
+  <inertial>
+    <origin xyz="-0.25478999884143183 -0.37341608733286624 0.0015000001453269463" rpy="0 0 0"/>
+    <mass value="9.560991796887844"/>
+    <inertia ixx="0.418952" iyy="0.256478" izz="0.675415" ixy="4e-06" iyz="-0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.25499 -0.3486 -0.1738" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amr_description/meshes/lower_glass_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="translucent"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.25499 -0.3486 -0.1738" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amr_description/meshes/lower_glass_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="front_caster_l_1">
+  <inertial>
+    <origin xyz="7.1044626288041535e-06 2.2656343989790884e-07 1.0798090942940042e-05" rpy="0 0 0"/>
+    <mass value="3.1174459712366613"/>
+    <inertia ixx="0.006247" iyy="0.003653" izz="0.003652" ixy="0.0" iyz="0.0" ixz="-1e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.135091 -0.3209 0.10565" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amr_description/meshes/front_caster_l_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="black"/>
+  </visual>
+  <collision>
+    <origin xyz="0.135091 -0.3209 0.10565" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amr_description/meshes/front_caster_l_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="front_caster_r_1">
+  <inertial>
+    <origin xyz="6.595256198976829e-06 2.2656344167426568e-07 1.0798090934627247e-05" rpy="0 0 0"/>
+    <mass value="3.1174459712366613"/>
+    <inertia ixx="0.006247" iyy="0.003653" izz="0.003652" ixy="0.0" iyz="0.0" ixz="-1e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.135082 -0.3209 0.10565" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amr_description/meshes/front_caster_r_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="black"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.135082 -0.3209 0.10565" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amr_description/meshes/front_caster_r_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="back_caster_l_1">
+  <inertial>
+    <origin xyz="4.973830622020947e-06 -7.901675827926002e-06 -2.469672607946505e-07" rpy="0 0 0"/>
+    <mass value="1.1658858405803743"/>
+    <inertia ixx="0.001213" iyy="0.000709" izz="0.000709" ixy="0.0" iyz="-0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.125 0.270845 0.121371" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amr_description/meshes/back_caster_l_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="black"/>
+  </visual>
+  <collision>
+    <origin xyz="0.125 0.270845 0.121371" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amr_description/meshes/back_caster_l_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="back_caster_r_1">
+  <inertial>
+    <origin xyz="4.973830621424202e-06 -7.901675696475596e-06 -2.4696755576703033e-07" rpy="0 0 0"/>
+    <mass value="1.1658858405803743"/>
+    <inertia ixx="0.001213" iyy="0.000709" izz="0.000709" ixy="0.0" iyz="-0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.125 0.270845 0.121371" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amr_description/meshes/back_caster_r_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="black"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.125 0.270845 0.121371" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amr_description/meshes/back_caster_r_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+
+<link name="driver_1">
+  <inertial>
+    <origin xyz="-0.150103225283367 0.14409614506155544 -0.02296341456886583" rpy="0 0 0"/>
+    <mass value="1.3127534117731405"/>
+    <inertia ixx="0.002525" iyy="0.002374" izz="0.004613" ixy="5e-05" iyz="2.1e-05" ixz="-2.9e-05"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.089594 0.130871 -0.098812" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amr_description/meshes/driver_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="orange"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.089594 0.130871 -0.098812" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amr_description/meshes/driver_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="battery_v1_1">
+  <inertial>
+    <origin xyz="-4.885423136425943e-05 -1.2070302295413837e-05 0.06739807045858735" rpy="0 0 0"/>
+    <mass value="52.506787726494444"/>
+    <inertia ixx="0.177605" iyy="0.56029" izz="0.578875" ixy="-9.5e-05" iyz="4.5e-05" ixz="0.000182"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.002 0.133 0.1499" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amr_description/meshes/battery_v1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="dark_grey"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.002 0.133 0.1499" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amr_description/meshes/battery_v1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="e_stop__1__1">
+  <inertial>
+    <origin xyz="0.00010571956562105411 0.0006564971443290823 -0.000896825830964787" rpy="0 0 0"/>
+    <mass value="0.06273786707033309"/>
+    <inertia ixx="1.1e-05" iyy="3e-06" izz="1.1e-05" ixy="0.0" iyz="-1e-06" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.14477 -0.33788 -0.13263" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amr_description/meshes/e_stop__1__1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="dark_red"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.14477 -0.33788 -0.13263" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amr_description/meshes/e_stop__1__1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="lidar_v1_1">
+  <inertial>
+    <origin xyz="2.1400603511523287e-13 1.939446936383149e-10 0.021983756094855422" rpy="0 0 0"/>
+    <mass value="0.07796797120140989"/>
+    <inertia ixx="5.8e-05" iyy="5.8e-05" izz="9.1e-05" ixy="0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.0 -0.269 -0.1777" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amr_description/meshes/lidar_v1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="dark_red"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.0 -0.269 -0.1777" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://amr_description/meshes/lidar_v1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="Rigid 4" type="fixed">
+  <origin xyz="0.2 0.103 0.0201" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="motor_right_1"/>
+</joint>
+
+<joint name="Rigid 5" type="fixed">
+  <origin xyz="-0.2 0.103 0.0201" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="motor_left_1"/>
+</joint>
+
+<joint name="Revolute 6" type="continuous">
+  <origin xyz="0.0802 -0.0655 -0.1091" rpy="0 0 0"/>
+  <parent link="motor_right_1"/>
+  <child link="tyre_right_1"/>
+  <axis xyz="-1.0 0.0 -0.0"/>
+</joint>
+
+<joint name="Revolute 7" type="continuous">
+  <origin xyz="-0.0802 -0.0655 -0.1091" rpy="0 0 0"/>
+  <parent link="motor_left_1"/>
+  <child link="tyre_left_1"/>
+  <axis xyz="-1.0 -0.0 0.0"/>
+</joint>
+
+<joint name="Rigid 15" type="fixed">
+  <origin xyz="-1e-05 0.2705 0.1207" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="lidar_base_1"/>
+</joint>
+
+<joint name="Rigid 27" type="fixed">
+  <origin xyz="-0.27891 0.3506 0.2468" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="top_link_1"/>
+</joint>
+
+<joint name="Rigid 28" type="fixed">
+  <origin xyz="-0.050172 0.3185 0.051575" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="depth_mount_1"/>
+</joint>
+
+<joint name="Rigid 41" type="fixed">
+  <origin xyz="-1e-05 -0.370957 0.1098" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="back_glass_1"/>
+</joint>
+
+<joint name="Rigid 45" type="fixed">
+  <origin xyz="-0.266467 -0.0195 0.1098" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="left_glass_1"/>
+</joint>
+
+<joint name="Rigid 46" type="fixed">
+  <origin xyz="0.26737 -0.0195 0.1098" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="right_glass_1"/>
+</joint>
+
+<joint name="Rigid 47" type="fixed">
+  <origin xyz="-1e-05 0.33288 0.1098" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="front_glass_1"/>
+</joint>
+
+<joint name="Rigid 51" type="fixed">
+  <origin xyz="0.17 -0.0595 0.0061" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="base_sheet_1"/>
+</joint>
+
+<joint name="Rigid 53" type="fixed">
+  <origin xyz="0.14478 -0.005 0.02283" rpy="0 0 0"/>
+  <parent link="back_glass_1"/>
+  <child link="e_stop_1"/>
+</joint>
+
+<joint name="Rigid 55" type="fixed">
+  <origin xyz="-0.092438 -0.0025 0.030516" rpy="0 0 0"/>
+  <parent link="back_glass_1"/>
+  <child link="selector_switch_1"/>
+</joint>
+
+<joint name="Rigid 56" type="fixed">
+  <origin xyz="-0.172348 -0.0025 0.030016" rpy="0 0 0"/>
+  <parent link="back_glass_1"/>
+  <child link="selector_switch__1__1"/>
+</joint>
+
+<joint name="Rigid 57" type="fixed">
+  <origin xyz="-0.0041 0.0 0.03" rpy="0 0 0"/>
+  <parent link="top_link_1"/>
+  <child link="upper_glass_1"/>
+</joint>
+
+<joint name="Rigid 58" type="fixed">
+  <origin xyz="0.25499 0.3486 0.1738" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="lower_glass_1"/>
+</joint>
+
+<joint name="Revolute 64" type="continuous">
+  <origin xyz="-0.135091 0.3209 -0.10565" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="front_caster_l_1"/>
+  <axis xyz="-1.0 0.0 -0.0"/>
+</joint>
+
+<joint name="Revolute 65" type="continuous">
+  <origin xyz="0.135082 0.3209 -0.10565" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="front_caster_r_1"/>
+  <axis xyz="-1.0 0.0 -0.0"/>
+</joint>
+
+<joint name="Revolute 68" type="continuous">
+  <origin xyz="-0.125 -0.270845 -0.121371" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="back_caster_l_1"/>
+  <axis xyz="-1.0 -0.0 -0.0"/>
+</joint>
+
+<joint name="Revolute 69" type="continuous">
+  <origin xyz="0.125 -0.270845 -0.121371" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="back_caster_r_1"/>
+  <axis xyz="-1.0 -0.0 -0.0"/>
+</joint>
+
+<joint name="Rigid 72" type="fixed">
+  <origin xyz="-0.080406 -0.071371 0.092712" rpy="0 0 0"/>
+  <parent link="base_sheet_1"/>
+  <child link="driver_1"/>
+</joint>
+
+<joint name="Rigid 80" type="fixed">
+  <origin xyz="0.002 -0.133 -0.1499" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="battery_v1_1"/>
+</joint>
+
+<joint name="Rigid 81" type="fixed">
+  <origin xyz="0.14478 0.005 0.02283" rpy="0 0 0"/>
+  <parent link="front_glass_1"/>
+  <child link="e_stop__1__1"/>
+</joint>
+
+<joint name="Rigid 82" type="fixed">
+  <origin xyz="1e-05 -0.0015 0.057" rpy="0 0 0"/>
+  <parent link="lidar_base_1"/>
+  <child link="lidar_v1_1"/>
+</joint>
+<joint name="Rigid 83" type="fixed">
+  <origin xyz="0.050173 0.0399 -0.005" rpy="0 0 0"/>
+  <parent link="depth_mount_1"/>
+  <child link="depth_camera_1"/>
+</joint>
+
+<joint name="Rigid 84" type="fixed">
+  <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
+  <parent link="depth_camera_1"/>
+  <child link="depth_frame_1"/>
+</joint>
+
+</robot>
