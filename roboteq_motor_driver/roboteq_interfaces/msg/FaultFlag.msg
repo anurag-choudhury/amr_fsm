@@ -1,0 +1,9 @@
+bool overheat
+bool overvolt
+bool undervolt
+bool shortt
+bool estop
+bool motorsensor
+bool mosfail
+bool defconfig
+bool stofault

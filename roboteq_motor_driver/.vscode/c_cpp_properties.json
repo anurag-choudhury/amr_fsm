@@ -1,0 +1,26 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/home/optimus/Desktop/motor_driver_testing_ws/install/serial/include/**",
+        "/home/optimus/Desktop/motor_driver_testing_ws/install/roboteq_interfaces/include/**",
+        "/home/optimus/mira_ws/install/diffdrive_bot/include/**",
+        "/home/optimus/test_ws/install/test_modbus/include/**",
+        "/opt/ros/humble/include/**",
+        "/home/optimus/Desktop/motor_driver_testing_ws/src/roboteq_controller/include/**",
+        "/home/optimus/Desktop/motor_driver_testing_ws/src/serial-ros2/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}
