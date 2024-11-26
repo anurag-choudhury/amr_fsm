@@ -34,5 +34,5 @@ def generate_launch_description():
     )
 
     ld.add_action(node)
-    ld.add_action(include_desc)
+    # ld.add_action(include_desc)
     return ld

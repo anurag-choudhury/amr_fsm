@@ -166,7 +166,7 @@ namespace Roboteq
 
     // Scale factors for motor commands (adjust if needed)
     const float linear_scale = 700.0;  // Scale linear velocity to motor units
-    const float angular_scale = 110.0; // Scale angular velocity to motor units
+    const float angular_scale = -110.0; // Scale angular velocity to motor units
 
     // Convert velocities to motor command values
     int32_t linear_command = static_cast<int32_t>(linear_velocity * linear_scale);
@@ -402,7 +402,7 @@ namespace Roboteq
         // determine deltas of distance and angle
         float linear = ((float)odom_encoder_right * wheel_circumference / (60 * gear_ratio) + (float)odom_encoder_left * wheel_circumference / (60 * gear_ratio)) / 2;
         //  float angular = ((float)odom_encoder_right / (float)encoder_cpr * wheel_circumference - (float)odom_encoder_left / (float)encoder_cpr * wheel_circumference) / track_width * -1.0;
-        float angular = ((float)odom_encoder_right * wheel_circumference / (60 * gear_ratio) - (float)odom_encoder_left * wheel_circumference / (60 * gear_ratio)) / track_width;
+        float angular = -((float)odom_encoder_right * wheel_circumference / (60 * gear_ratio) - (float)odom_encoder_left * wheel_circumference / (60 * gear_ratio)) / track_width;
         // Update odometry
         odom_x += linear * dt * cos(odom_yaw);         // m
         odom_y += linear * dt * sin(odom_yaw);         // m
