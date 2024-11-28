@@ -1,0 +1,2279 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot 
+  name="cad_assembly_amr_final_1">
+<!-- <include filename="$(find cad_assembly_amr_final_1)/urdf/cad_assembly_amr_final_1.trans" /> -->
+
+
+
+
+<!--                     GAZEBO_PLUGINS                  -->
+
+  <gazebo>
+    <plugin filename="libgazebo_ros_diff_drive.so" name="differential_drive_controller" >
+      <legacyMode>false</legacyMode>
+      <alwaysOn>true</alwaysOn>
+      <updateRate>40</updateRate>
+      <leftJoint>left_joint</leftJoint>
+      <rightJoint>joint_right</rightJoint>
+      <wheelSeparation>0.56</wheelSeparation>
+      <wheelDiameter>0.154</wheelDiameter>
+      <torque>20</torque>
+      <commandTopic>cmd_vel</commandTopic>
+      <odometryTopic>odom</odometryTopic>
+      <odometryFrame>odom</odometryFrame>
+      <robotBaseFrame>base_link</robotBaseFrame>
+
+      <!--         ADDED       -->
+      <publishWheelTF>false</publishWheelTF>
+      <publishWheelJointState>true</publishWheelJointState>
+      <rosDebugLevel>na</rosDebugLevel>
+      <wheelAcceleration>0</wheelAcceleration>
+      <wheelTorque>20</wheelTorque>
+      <publishTf>true</publishTf>
+      <publishOdom>true</publishOdom>
+			<publishOdomTF>true</publishOdomTF>
+      <odometrySource>world</odometrySource>
+      <!-- <covariance_x>0.0001</covariance_x>
+			<covariance_y>0.0001</covariance_y>
+			<covariance_z>0.0001</covariance_z> -->
+<!--                            -->
+
+    </plugin>
+  </gazebo>
+
+  <gazebo reference="sensor_laser">
+    <sensor type="ray" name="head_hokuyo_sensor">
+      <pose>0 0 0 0 0 0</pose>
+      <visualize>true</visualize>
+      <update_rate>100</update_rate>
+      <ray>
+        <scan>
+          <horizontal>
+            <samples>720</samples>
+            <resolution>1</resolution>
+            <min_angle>-1.570796</min_angle>
+            <max_angle>1.570796</max_angle>
+          </horizontal>
+        </scan>
+        <range>
+          <min>0.10</min>
+          <max>10.0</max>
+          <resolution>0.01</resolution>
+        </range>
+        <noise>
+          <type>gaussian</type>
+          <mean>0.0</mean>
+          <stddev>0.01</stddev>
+        </noise>
+      </ray>
+      <plugin name="gazebo_ros_head_hokuyo_controller" filename="libgazebo_ros_laser.so">
+        <topicName>/scan</topicName>
+        <frameName>sensor_laser</frameName>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+
+<!--                        TRANS -->
+<!-- <transmission name="joint_right_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="joint_right">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="joint_right_actr">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<transmission name="left_joint_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="left_joint">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="left_joint_actr">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission> -->
+
+
+<!--                        GAZEBO TAG -->
+<!-- <gazebo> -->
+  <!-- <plugin filename="libgazebo_ros_control.so" name="control"/> -->
+  <!-- <robotNamespace>/cad_assembly_amr_final_1_controller</robotNamespace> -->
+<!-- </gazebo> -->
+
+<gazebo reference="base_link">
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
+  <selfCollide>true</selfCollide>
+  <gravity>true</gravity>
+</gazebo>
+
+<gazebo reference="right_wheel">
+  <mu1>1000</mu1>
+  <mu2>1000</mu2>
+  <selfCollide>true</selfCollide>
+</gazebo>
+
+<gazebo reference="left_wheel">
+  <mu1>1000</mu1>
+  <mu2>1000</mu2>
+  <selfCollide>true</selfCollide>
+</gazebo>
+
+<gazebo reference="sensor_laser">
+  <mu1>0.2</mu1>
+  <mu2>0.2</mu2>
+  <selfCollide>true</selfCollide>
+</gazebo>
+
+
+
+<!--                     URDF               -->
+ <!-- <link name="world"/> -->
+    <!-- <joint name="fixed" type="floating"> -->
+      <!-- <parent link ="world" /> -->
+      <!-- <child link ="base_link" /> -->
+    <!-- </joint> -->
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="-0.120044004725085 -0.0311678812011165 0.1097999999999496"
+        rpy="0 0 0" />
+      <mass
+        value="1.041935769065505" />
+      <inertia
+        ixx="0.0124970752255346"
+        ixy="3.31870238430256E-17"
+        ixz="-8.36937029359261E-18"
+        iyy="0.0023975609154183"
+        iyz="-4.36036057524128E-17"
+        izz="0.0148907114085818" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="left_wheel">
+    <inertial>
+      <origin
+        xyz="5.73941775963982E-05 -0.0547817281545586 0.000662361701355196"
+        rpy="0 0 0" />
+      <mass
+        value="1.15411724032787" />
+      <inertia
+        ixx="0.00169670713331925"
+        ixy="8.3068554945323E-08"
+        ixz="-1.47480764218124E-07"
+        iyy="0.00298663361197173"
+        iyz="8.62121560025982E-08"
+        izz="0.00167881991277623" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/left_wheel.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/left_wheel.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="left_joint"
+    type="continuous">
+    <origin
+      xyz="-0.0649400472508853 0.249032118798883 0.0781099999999999"
+      rpy="0 1.56 0" />
+    <parent
+      link="Link35" />
+    <child
+      link="left_wheel" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      effort="30"
+      velocity="5" />
+  </joint>
+  <link
+    name="right_wheel">
+    <inertial>
+      <origin
+        xyz="-5.73941775350029E-05 0.0547817281545965 0.000662361701394734"
+        rpy="0 0 0" />
+      <mass
+        value="1.15411724032787" />
+      <inertia
+        ixx="0.00169670713331966"
+        ixy="8.30685548989815E-08"
+        ixz="1.47480764332087E-07"
+        iyy="0.00298663361197211"
+        iyz="-8.62121559036301E-08"
+        izz="0.00167881991277635" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/right_wheel.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/right_wheel.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint_right"
+    type="continuous">
+    <origin
+      xyz="-0.0649400472508853 -0.311367881201119 0.0780799999999999"
+      rpy="0 1.56 0" />
+    <parent
+      link="Link34" />
+    <child
+      link="right_wheel" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      effort="30"
+      velocity="5" />
+  </joint>
+  <link
+    name="Link1">
+    <inertial>
+      <origin
+        xyz="-0.458940047250855 -0.0311678812011156 0.172299999999953"
+        rpy="0 0 0" />
+      <mass
+        value="0.15370520802836" />
+      <inertia
+        ixx="0.00206367743977508"
+        ixy="2.90201902564923E-21"
+        ixz="-3.90910694090929E-21"
+        iyy="2.85493321272229E-05"
+        iyz="-8.57924550641996E-21"
+        izz="0.00206367743977508" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/Link1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/Link1.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint1"
+    type="fixed">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="Link1" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="Link2">
+    <inertial>
+      <origin
+        xyz="-0.216490430161542 -0.0312444036729151 0.107765712146774"
+        rpy="0 0 0" />
+      <mass
+        value="8.71276230076757" />
+      <inertia
+        ixx="0.0919527713651485"
+        ixy="-6.14228140772403E-05"
+        ixz="1.26116698146279E-05"
+        iyy="0.0398150311485115"
+        iyz="1.91549924270925E-05"
+        izz="0.096665853431385" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/Link2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/Link2.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint2"
+    type="fixed">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="Link2" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="0"
+      upper="0"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="Link3">
+    <inertial>
+      <origin
+        xyz="-0.108940047250836 -0.301167881198528 0.246000000014389"
+        rpy="0 0 0" />
+      <mass
+        value="1.436520685221923" />
+      <inertia
+        ixx="0.000205716006741984"
+        ixy="-5.92031368264508E-17"
+        ixz="-3.8099743968262E-19"
+        iyy="0.0169853684284612"
+        iyz="3.96954847930399E-09"
+        izz="0.0168615417193838" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/Link3.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/Link3.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint3"
+    type="fixed">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="Link3" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="Link4">
+    <inertial>
+      <origin
+        xyz="-0.108940047250849 0.238832118801473 0.246000000014392"
+        rpy="0 0 0" />
+      <mass
+        value="1.436520685221924" />
+      <inertia
+        ixx="0.000205716006741984"
+        ixy="-6.53733304446301E-17"
+        ixz="-1.42190742874982E-19"
+        iyy="0.0169853684284612"
+        iyz="3.96954847929519E-09"
+        izz="0.0168615417193838" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/Link4.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/Link4.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint4"
+    type="fixed">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="Link4" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="Link5">
+    <inertial>
+      <origin
+        xyz="-0.463940047248248 -0.0311678812011161 0.246000000014383"
+        rpy="0 0 0" />
+      <mass
+        value="1.965907044965438" />
+      <inertia
+        ixx="0.0100450504100988"
+        ixy="-4.70359182903092E-20"
+        ixz="3.32741563710327E-09"
+        iyy="0.000172438417416075"
+        iyz="-1.15593361528387E-19"
+        izz="0.00994125449219573" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/Link5.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/Link5.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint5"
+    type="fixed">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="Link5" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="Link6">
+    <inertial>
+      <origin
+        xyz="0.246059952751741 -0.0311678812011162 0.246000000014393"
+        rpy="0 0 0" />
+      <mass
+        value="1.065907044965436" />
+      <inertia
+        ixx="0.0100450504100988"
+        ixy="-3.50320549018335E-20"
+        ixz="3.32741563708656E-09"
+        iyy="0.000172438417416075"
+        iyz="-1.32818398610428E-19"
+        izz="0.0099412544921957" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="-0.24 0.03 -0.308"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/Link6.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="-0.24 0.03 -0.308"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/Link6.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint6"
+    type="fixed">
+    <origin
+      xyz="0.24 -0.03 0.308"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="Link6" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="Link7">
+    <inertial>
+      <origin
+        xyz="-0.143940047250853 0.153832118798883 0.0932999999999522"
+        rpy="0 0 0" />
+      <mass
+        value="0.049185666569075" />
+      <inertia
+        ixx="7.17227232293328E-05"
+        ixy="-5.54037167522794E-21"
+        ixz="-4.38999970166423E-19"
+        iyy="7.17227232293328E-05"
+        iyz="-6.39884951765641E-21"
+        izz="9.13578628071131E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/Link7.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/Link7.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint7"
+    type="fixed">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="Link7" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="Link8">
+    <inertial>
+      <origin
+        xyz="-0.34461493448113 0.0576127554531144 0.227311211733729"
+        rpy="0 0 0" />
+      <mass
+        value="0.167225523651081" />
+      <inertia
+        ixx="0.000275275668175092"
+        ixy="-2.89256050943276E-06"
+        ixz="1.63881732203638E-07"
+        iyy="0.000234531995078022"
+        iyz="6.81651222029033E-08"
+        izz="0.000502995235545693" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/Link8.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/Link8.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint8"
+    type="fixed">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="Link8" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="0"
+      upper="0"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="Link9">
+    <inertial>
+      <origin
+        xyz="-0.231940047250852 0.208822722298121 0.187299999999951"
+        rpy="0 0 0" />
+      <mass
+        value="0.0391600670951286" />
+      <inertia
+        ixx="2.24437538896452E-05"
+        ixy="-6.64015770809315E-20"
+        ixz="2.80630673249095E-22"
+        iyy="3.05153745176888E-06"
+        iyz="1.35760775584513E-20"
+        izz="2.24437538896452E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/Link9.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/Link9.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint9"
+    type="fixed">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="Link9" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+  <link
+    name="Link10">
+    <inertial>
+      <origin
+        xyz="-0.338940047250853 -0.0311678812011153 0.172299999999948"
+        rpy="0 0 0" />
+      <mass
+        value="0.130649426824106" />
+      <inertia
+        ixx="0.00127072294455962"
+        ixy="-2.74895614072112E-21"
+        ixz="-4.26701118985479E-21"
+        iyy="2.42669323081394E-05"
+        iyz="3.66726053682152E-21"
+        izz="0.00127072294455962" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/Link10.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/Link10.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint10"
+    type="fixed">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="Link10" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="Link11">
+    <inertial>
+      <origin
+        xyz="-0.39894032888209 -0.15616793697623 0.154300404631122"
+        rpy="0 0 0" />
+      <mass
+        value="0.129293462534657" />
+      <inertia
+        ixx="0.000238325033060038"
+        ixy="-1.11769772959299E-09"
+        ixz="1.74400910964592E-11"
+        iyy="0.000238264542930696"
+        iyz="-9.64634866429045E-12"
+        izz="0.000475813644424298" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/Link11.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/Link11.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint11"
+    type="fixed">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="Link11" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="Link12">
+    <inertial>
+      <origin
+        xyz="-0.398940328882089 0.0938320630237707 0.154300404631121"
+        rpy="0 0 0" />
+      <mass
+        value="0.129293462534657" />
+      <inertia
+        ixx="0.000238325033060038"
+        ixy="-1.11769772956574E-09"
+        ixz="1.74400910811975E-11"
+        iyy="0.000238264542930696"
+        iyz="-9.64634865955567E-12"
+        izz="0.000475813644424298" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/Link12.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/Link12.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint12"
+    type="fixed">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="Link12" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="Link13">
+    <inertial>
+      <origin
+        xyz="0.166060194442634 -0.191167238858664 0.213000461362713"
+        rpy="0 0 0" />
+      <mass
+        value="0.176211069113397" />
+      <inertia
+        ixx="0.000377128569827464"
+        ixy="-5.87470674607782E-11"
+        ixz="1.30516120517496E-10"
+        iyy="0.000520401312984034"
+        iyz="-9.56457410198861E-11"
+        izz="0.000896472361284732" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/Link13.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/Link13.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint13"
+    type="fixed">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="Link13" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="Link14">
+    <inertial>
+      <origin
+        xyz="0.166060194442634 0.128832761141336 0.213000461362742"
+        rpy="0 0 0" />
+      <mass
+        value="0.176211069113397" />
+      <inertia
+        ixx="0.000377128569827464"
+        ixy="-5.87470673558241E-11"
+        ixz="1.30516120518467E-10"
+        iyy="0.000520401312984033"
+        iyz="-9.56457410195288E-11"
+        izz="0.000896472361284732" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/Link14.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/Link14.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint14"
+    type="fixed">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="Link14" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="Link15">
+    <inertial>
+      <origin
+        xyz="0.193802618405017 -0.0311748788022809 0.223807483818397"
+        rpy="0 0 0" />
+      <mass
+        value="0.00323246017763136" />
+      <inertia
+        ixx="4.18109611006956E-05"
+        ixy="-3.78710175068604E-09"
+        ixz="-5.63438975707762E-06"
+        iyy="3.78541672516329E-05"
+        iyz="-1.08742722110766E-09"
+        izz="7.36785445888019E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="-0.18 0.0325 -0.308"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/Link15.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="-0.18 0.0325 -0.308"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/Link15.STL" />
+      </geometry>
+    </collision>
+  </link>
+  
+  <joint
+    name="Joint15"
+    type="fixed">
+    <origin
+      xyz="0.18 -0.0325 0.308"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="Link15" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="Link16">
+    <inertial>
+      <origin
+        xyz="0.0860599527491482 -0.0311678812011154 0.230999999999248"
+        rpy="0 0 0" />
+      <mass
+        value="0.195974140236158" />
+      <inertia
+        ixx="0.00426593968884983"
+        ixy="1.11831806580405E-21"
+        ixz="-5.99302047317472E-21"
+        iyy="3.64003984622091E-05"
+        iyz="3.53700427244591E-20"
+        izz="0.00426593968884983" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/Link16.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/Link16.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint16"
+    type="fixed">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="Link16" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="Link17">
+    <inertial>
+      <origin
+        xyz="0.196624239141828 -0.186353876739846 0.103749732519713"
+        rpy="0 0 0" />
+      <mass
+        value="1.0734800046616" />
+      <inertia
+        ixx="0.00296390285215948"
+        ixy="8.51874920600184E-08"
+        ixz="3.34931569820815E-05"
+        iyy="0.00355102148123258"
+        iyz="-1.81437140577416E-06"
+        izz="0.00229403118843101" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/Link17.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/Link17.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint17"
+    type="fixed">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="Link17" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="Link18">
+    <inertial>
+      <origin
+        xyz="-0.231940047250849 -0.27115848470035 0.187299999999947"
+        rpy="0 0 0" />
+      <mass
+        value="0.0391600670951286" />
+      <inertia
+        ixx="2.24437538896452E-05"
+        ixy="4.20113625114063E-22"
+        ixz="1.57039549976015E-22"
+        iyy="3.05153745176888E-06"
+        iyz="8.01961844946684E-20"
+        izz="2.24437538896452E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/Link18.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/Link18.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint18"
+    type="fixed">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="Link18" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="0"
+      upper="0"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="Link19">
+    <inertial>
+      <origin
+        xyz="-0.21644004725085 -0.0311678812011161 0.0267999999999432"
+        rpy="0 0 0" />
+      <mass
+        value="0.941935769065505" />
+      <inertia
+        ixx="0.0124970752255346"
+        ixy="3.31870238430256E-17"
+        ixz="-8.36937029359261E-18"
+        iyy="0.0023975609154183"
+        iyz="-4.36036057524128E-17"
+        izz="0.0148907114085818" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/Link19.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/Link19.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint19"
+    type="fixed">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="Link19" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="Link20">
+    <inertial>
+      <origin
+        xyz="-0.306440047250851 -0.0311678812011168 0.084299999999942"
+        rpy="0 0 0" />
+      <mass
+        value="0.0394325498269454" />
+      <inertia
+        ixx="0.000515240559709496"
+        ixy="3.56939373489624E-18"
+        ixz="7.27001479432645E-21"
+        iyy="1.41292208661844E-06"
+        iyz="3.64410592174574E-18"
+        izz="0.000513991939913823" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/Link20.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/Link20.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint20"
+    type="fixed">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="Link20" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="Link21">
+    <inertial>
+      <origin
+        xyz="-0.374883495664155 -0.156250461101378 0.0747492216621648"
+        rpy="0 0 0" />
+      <mass
+        value="0.401469613500441" />
+      <inertia
+        ixx="0.000575391349633005"
+        ixy="1.66472282521855E-08"
+        ixz="6.50310711871671E-06"
+        iyy="0.000689369729779345"
+        iyz="-3.52827194156081E-07"
+        izz="0.000445345589451271" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/Link21.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/Link21.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint21"
+    type="fixed">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="Link21" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="Link22">
+    <inertial>
+      <origin
+        xyz="-0.126440047250849 -0.0311678812011155 0.0842999999999418"
+        rpy="0 0 0" />
+      <mass
+        value="0.0394325498269454" />
+      <inertia
+        ixx="0.000515240559709496"
+        ixy="3.59947679029071E-18"
+        ixz="8.75164349335112E-21"
+        iyy="1.41292208661844E-06"
+        iyz="3.64590568245821E-18"
+        izz="0.000513991939913823" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/Link22.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/Link22.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint22"
+    type="fixed">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="Link22" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="Link23">
+    <inertial>
+      <origin
+        xyz="0.19662423914186 0.123646123260129 0.103749732519785"
+        rpy="0 0 0" />
+      <mass
+        value="1.07348000466138" />
+      <inertia
+        ixx="0.00296390285214938"
+        ixy="8.51874911187443E-08"
+        ixz="3.34931569757985E-05"
+        iyy="0.00355102148122461"
+        iyz="-1.81437140749238E-06"
+        izz="0.0022940311884329" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/Link23.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/Link23.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint23"
+    type="fixed">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="Link23" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="Link24">
+    <inertial>
+      <origin
+        xyz="0.0210599527491509 0.173832118798874 0.230999999999198"
+        rpy="0 0 0" />
+      <mass
+        value="0.0384263020070898" />
+      <inertia
+        ixx="3.55905848551444E-05"
+        ixy="1.16386194672992E-21"
+        ixz="-9.39867815142039E-22"
+        iyy="7.1373330318057E-06"
+        iyz="-6.28776957617616E-22"
+        izz="3.55905848551444E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/Link24.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/Link24.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint24"
+    type="fixed">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="Link24" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="Link25">
+    <inertial>
+      <origin
+        xyz="0.021059952749151 -0.236167881201115 0.230999999999224"
+        rpy="0 0 0" />
+      <mass
+        value="0.0384263020070898" />
+      <inertia
+        ixx="3.55905848551444E-05"
+        ixy="1.03536633174158E-21"
+        ixz="-1.51360319606566E-21"
+        iyy="7.13733303180571E-06"
+        iyz="-6.76511310487228E-22"
+        izz="3.55905848551444E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/Link25.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/Link25.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint25"
+    type="fixed">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="Link25" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="Link26">
+    <inertial>
+      <origin
+        xyz="-0.221440047250849 -0.216167881198525 0.187300000015011"
+        rpy="0 0 0" />
+      <mass
+        value="0.285664271946701" />
+      <inertia
+        ixx="0.000134622975000269"
+        ixy="-1.63980396445789E-17"
+        ixz="3.23205467449918E-20"
+        iyy="0.00482188393612312"
+        iyz="2.5977192254631E-09"
+        izz="0.00474085028091808" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/Link26.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/Link26.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint26"
+    type="fixed">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="Link26" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="Link27">
+    <inertial>
+      <origin
+        xyz="-0.22144004725085 0.153832118801476 0.187300000015025"
+        rpy="0 0 0" />
+      <mass
+        value="0.285664271946701" />
+      <inertia
+        ixx="0.000134622975000269"
+        ixy="-1.6398039644578E-17"
+        ixz="3.23205467610406E-20"
+        iyy="0.00482188393612312"
+        iyz="2.59771922546387E-09"
+        izz="0.00474085028091808" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/Link27.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/Link27.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint27"
+    type="fixed">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="Link27" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="Link28">
+    <inertial>
+      <origin
+        xyz="-0.374883495664153 0.0936466817086076 0.0747492216621653"
+        rpy="0 0 0" />
+      <mass
+        value="0.401469613500411" />
+      <inertia
+        ixx="0.000575391349632999"
+        ixy="1.66472282498037E-08"
+        ixz="6.5031071187309E-06"
+        iyy="0.000689369729779311"
+        iyz="-3.5282719416229E-07"
+        izz="0.000445345589451252" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/Link28.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/Link28.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint28"
+    type="fixed">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="Link28" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="Link29">
+    <inertial>
+      <origin
+        xyz="-0.231929570707067 0.183832118798885 0.187299999999943"
+        rpy="0 0 0" />
+      <mass
+        value="0.0765369242121023" />
+      <inertia
+        ixx="3.75837417992498E-05"
+        ixy="-1.49646180381934E-22"
+        ixz="-1.86115637824479E-21"
+        iyy="8.23761841472627E-05"
+        iyz="-1.27054942088148E-21"
+        izz="5.62729809798283E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/Link29.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/Link29.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint29"
+    type="fixed">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="Link29" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="Link30">
+    <inertial>
+      <origin
+        xyz="-0.231940178668732 -0.243164681601725 0.187299999999934"
+        rpy="0 0 0" />
+      <mass
+        value="0.0168968699572401" />
+      <inertia
+        ixx="2.82168888591726E-06"
+        ixy="-9.03063447762258E-21"
+        ixz="2.7569671322451E-22"
+        iyy="5.30104790498525E-06"
+        iyz="-1.10240103062633E-11"
+        izz="2.82142007622028E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/Link30.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/Link30.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint30"
+    type="fixed">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="Link30" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="Link31">
+    <inertial>
+      <origin
+        xyz="-0.231940178668693 0.180835318398275 0.187299999999944"
+        rpy="0 0 0" />
+      <mass
+        value="0.0168968699572401" />
+      <inertia
+        ixx="2.82168888591726E-06"
+        ixy="-8.64941407516074E-21"
+        ixz="-4.15348065078189E-21"
+        iyy="5.30104790498525E-06"
+        iyz="-1.10240103057057E-11"
+        izz="2.82142007622028E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/Link31.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/Link31.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint31"
+    type="fixed">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="Link31" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="Link32">
+    <inertial>
+      <origin
+        xyz="-0.231917087216282 0.238832144358291 0.19213076818306"
+        rpy="0 0 0" />
+      <mass
+        value="0.0427853512427509" />
+      <inertia
+        ixx="1.47659649745295E-05"
+        ixy="3.88263351007286E-11"
+        ixz="2.46888863224477E-08"
+        iyy="2.55229311948895E-05"
+        iyz="2.84877921607819E-11"
+        izz="1.37327360943571E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/Link32.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/Link32.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint32"
+    type="fixed">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="Link32" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="Link33">
+    <inertial>
+      <origin
+        xyz="-0.173898337093489 -0.0311678812011152 0.192562487600842"
+        rpy="0 0 0" />
+      <mass
+        value="0.408138119584668" />
+      <inertia
+        ixx="0.00490290267097414"
+        ixy="7.16935454095538E-18"
+        ixz="-1.65766592879883E-07"
+        iyy="0.00417290712094575"
+        iyz="5.74439859055914E-19"
+        izz="0.00905213370870661" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/Link33.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/Link33.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint33"
+    type="fixed">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="Link33" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="Link34">
+    <inertial>
+      <origin
+        xyz="-0.0649400472508466 0.174832118798885 0.131935381448907"
+        rpy="0 0 0" />
+      <mass
+        value="0.141033788770476" />
+      <inertia
+        ixx="0.000236938239126702"
+        ixy="-3.122519163546E-21"
+        ixz="-6.30413160234535E-20"
+        iyy="0.00050739815814905"
+        iyz="-3.60873959123404E-21"
+        izz="0.00027384472995284" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/Link34.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/Link34.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint34"
+    type="fixed">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="Link34" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="Link35">
+    <inertial>
+      <origin
+        xyz="-0.0649400472508466 -0.237167881201115 0.131935381448947"
+        rpy="0 0 0" />
+      <mass
+        value="0.141033788770476" />
+      <inertia
+        ixx="0.000236938239126702"
+        ixy="-1.25925623200838E-21"
+        ixz="-2.79969718137102E-20"
+        iyy="0.00050739815814905"
+        iyz="-7.24703862451917E-21"
+        izz="0.000273844729952839" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/Link35.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/Link35.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint35"
+    type="fixed">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="Link35" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="Link36">
+    <inertial>
+      <origin
+        xyz="0.0160599527491533 -0.0311678812011232 0.172299999999946"
+        rpy="0 0 0" />
+      <mass
+        value="0.153705208028359" />
+      <inertia
+        ixx="0.00206367743977507"
+        ixy="8.84912654241048E-21"
+        ixz="-5.12625797584132E-21"
+        iyy="2.85493321272228E-05"
+        iyz="-3.8868947067103E-21"
+        izz="0.00206367743977507" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/Link36.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/Link36.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint36"
+    type="fixed">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="Link36" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+
+
+<!--                     LIDAR LINK               -->
+
+  <link
+    name="sensor_laser">
+    <inertial>
+      <origin
+        xyz="5.73941775963982E-05 -0.0547817281545586 0.000662361701355196"
+        rpy="0 1.57 0" />
+      <mass
+        value="1.15411724032787" />
+      <inertia
+        ixx="0.00169670713331925"
+        ixy="8.3068554945323E-08"
+        ixz="-1.47480764218124E-07"
+        iyy="0.00298663361197173"
+        iyz="8.62121560025982E-08"
+        izz="0.00167881991277623" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="1.57 0 1.57" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/R2000.STL" scale="0.001 0.001 0.001" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="1.57 3.14 1.57" />
+      <geometry>
+        <mesh
+          filename="package://cad_assembly_amr_final_1/meshes/R2000.STL" scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint_sensor_laser"
+    type="fixed">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="Link15" />
+    <child
+      link="sensor_laser" />
+    <axis
+      xyz="0 0 0 0 0 0" />
+   
+  </joint>
+
+</robot>

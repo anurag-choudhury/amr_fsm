@@ -8,6 +8,6 @@ pf_r2000:
     max_num_points_scan: 0
     packet_type: "C"
     scan_topic: "/pf/scan"
-    frame_id: "lidar_v1_1"
+    frame_id: "sensor_laser"
     watchdogtimeout: 60000
     watchdog: true

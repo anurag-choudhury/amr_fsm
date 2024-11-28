@@ -276,11 +276,19 @@ void RoboteqDriver::cmdVelCallback(const geometry_msgs::msg::Twist::SharedPtr ms
     // Calculate right and left speed based on linear and angular velocities
     float right_speed = msg->linear.x + track_width_ * msg->angular.z / 2.0;
     float left_speed  = msg->linear.x - track_width_ * msg->angular.z / 2.0;
-
+    // Check if both speeds are zero to stop the motor
+    if (msg->linear.x == 0.0 && msg->angular.z == 0.0) {
+        // Stop both motors
+        std::string stop_cmd = "!G 1 0\r!G 2 0\r";
+        RCLCPP_INFO(this->get_logger(), "[RoboteQ] Stopping motors");
+        ser_.write(stop_cmd);
+        ser_.flush();
+        return;
+    }
     if (!closed_loop_) {
         // Calculate motor power in open-loop (scale 0-1000)
-        float right_power = right_speed * 1000.0 * 60.0 / (wheel_circumference_ * max_rpm_);
-        float left_power  = left_speed * 1000.0 * 60.0 / (wheel_circumference_ * max_rpm_);
+        float right_power = right_speed * 500.0 * 60.0 / (wheel_circumference_ * max_rpm_);
+        float left_power  = left_speed * 80.0 * 60.0 / (wheel_circumference_ * max_rpm_);
 
         RCLCPP_INFO(this->get_logger(), "[ROBOTEQ] left: %9d right: %9d", (int)left_power, (int)right_power);
 
@@ -296,7 +304,7 @@ void RoboteqDriver::cmdVelCallback(const geometry_msgs::msg::Twist::SharedPtr ms
         }
     } else {
         // Calculate motor RPM in closed-loop (rpm)
-        int32_t right_rpm = gear_reduction_ * right_speed * 60.0 / wheel_circumference_;
+        int32_t right_rpm = - gear_reduction_ * right_speed * 60.0 / wheel_circumference_;
         int32_t left_rpm  = gear_reduction_ * left_speed * 60.0 / wheel_circumference_;
 
         RCLCPP_INFO(this->get_logger(), "[ROBOTEQ] left: %9d right: %9d", left_rpm, right_rpm);

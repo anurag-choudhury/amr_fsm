@@ -58,6 +58,7 @@ install(DIRECTORY
 
 install(PROGRAMS
   scripts/roboteq_proc_node.py
+  scripts/diff_tf.py
   DESTINATION lib/${PROJECT_NAME}
 )
 

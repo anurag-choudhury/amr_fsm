@@ -8,7 +8,7 @@ from ament_index_python.packages import get_package_share_directory
 
 def generate_launch_description():
     desc_share_direcrory= get_package_share_directory("amr_description")
-    xacro_path= os.path.join(desc_share_direcrory,"urdf/fsm.xacro")
+    xacro_path= os.path.join(desc_share_direcrory,"urdf/cad_assembly_amr_final_1.xacro")
     # create urdf from xacro 
     robot_xacro_config = xacro.process_file(xacro_path)
     robot_urdf = robot_xacro_config.toxml()

@@ -375,7 +375,7 @@ namespace Roboteq
                             odom_buf[delim] = 0;
                             odom_encoder_right = (int32_t)strtol(odom_buf + 2, NULL, 10);
                             odom_encoder_left = (int32_t)strtol(odom_buf + delim + 1, NULL, 10);
-
+                            std::cout <<odom_encoder_right <<"::::::" << odom_encoder_left ;
                             odom_publish();
                             break;
                         }

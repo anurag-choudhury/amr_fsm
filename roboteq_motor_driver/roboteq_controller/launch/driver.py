@@ -27,7 +27,15 @@ def generate_launch_description():
         executable = 'roboteq_proc_node.py',
         namespace= 'roboteq'
     )
+    node3=Node(
+        package = 'roboteq_controller',
+        name = 'diff_odom',
+        executable = 'diff_tf.py',
+        namespace= 'roboteq'
+    )
+
 
     ld.add_action(node1)
     ld.add_action(node2)
+    ld.add_action(node3)
     return ld
