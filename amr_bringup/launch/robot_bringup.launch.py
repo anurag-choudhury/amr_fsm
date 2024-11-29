@@ -37,9 +37,15 @@ def generate_launch_description():
     robot_description = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(robot_description_launch)
     )
+    filtered_laser_scan = Node(
+        package='filtered_laser_scan',
+        executable='bounding_box_laser',
+        name="filtered_laser_scan"
+    )
 
     return LaunchDescription([
         roboteq_driver,
         lidar_driver,
-        robot_description
+        robot_description,
+        filtered_laser_scan
     ])
