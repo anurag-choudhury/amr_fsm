@@ -35,7 +35,7 @@ else
         ${DOCKER_ARGS[@]} \
         -e DISPLAY=$DISPLAY \
         -v /tmp/.X11-unix:/tmp/.X11-unix \
-        -v $PWD:/workspaces/amr_ws/src \
+        -v $PWD/../:/workspaces/amr_ws \
         -v /etc/localtime:/etc/localtime:ro \
         --privileged \
         --name "$container_name" \
