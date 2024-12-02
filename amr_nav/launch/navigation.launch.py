@@ -10,7 +10,7 @@ import os
 def generate_launch_description():
     pkg_amr_nav=get_package_share_directory("amr_nav")
     pkg_nav2_bringup=get_package_share_directory("nav2_bringup")
-    path_yaml= os.path.join(pkg_amr_nav, 'maps', 'map_save.yaml')
+    path_yaml= os.path.join(pkg_amr_nav, 'maps', 'map_random.yaml')
     use_sim_time = LaunchConfiguration('use_sim_time', default='true')
     with_rviz = LaunchConfiguration('with_rviz', default='true')
     rviz_config=os.path.join(pkg_amr_nav,"config","nav_rviz.rviz")
@@ -23,8 +23,8 @@ def generate_launch_description():
         PythonLaunchDescriptionSource(os.path.join(pkg_nav2_bringup,"launch","bringup_launch.py")),
         launch_arguments={
             "map":map_yaml_file,
-            "use_sim_time":use_sim_time,
-            "params_file":nav2_config_file
+            "params_file":nav2_config_file,
+            "use_sim_time":use_sim_time
         }.items()
     )
     rviz = Node(package='rviz2',
@@ -35,7 +35,7 @@ def generate_launch_description():
                 condition=IfCondition(with_rviz)
                 )
     return LaunchDescription([
-        # DeclareLaunchArgument("map",default_value=os.path.join(pkg_amr_nav, 'maps', 'map_save.yaml') ,description="map.yaml file"),
+        DeclareLaunchArgument("map",default_value=os.path.join(pkg_amr_nav, 'maps', 'map_random.yaml') ,description="map.yaml file"),
         DeclareLaunchArgument("params_file",default_value=nav2_config_file,description="params for nav2"),
         DeclareLaunchArgument("use_sim_time",default_value=use_sim_time,description="sim_time true or false"),
         nav2_bringup_launch_file

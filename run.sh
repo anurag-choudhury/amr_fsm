@@ -34,6 +34,8 @@ else
     docker run -it --rm \
         ${DOCKER_ARGS[@]} \
         -e DISPLAY=$DISPLAY \
+	--runtime=nvidia \
+	--gpus all \
         -v /tmp/.X11-unix:/tmp/.X11-unix \
         -v $PWD/../:/workspaces/amr_ws \
         -v /etc/localtime:/etc/localtime:ro \

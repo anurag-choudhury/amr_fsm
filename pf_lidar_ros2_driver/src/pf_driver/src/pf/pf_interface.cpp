@@ -228,7 +228,7 @@ bool PFInterface::handle_version(int major_version, int minor_version, int devic
   else if (device_family == 5 || device_family == 7)
   {
     expected_dev = "R2300";
-    protocol_interface_ = std::make_shared<PFSDP_2300>(node_, info_, config_, params_);
+    // protocol_interface_ = std::make_shared<PFSDP_2300>(node_, info_, config_, params_);
 
     if (device_family == 5)
     {

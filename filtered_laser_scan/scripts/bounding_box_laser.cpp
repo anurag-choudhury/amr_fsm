@@ -31,8 +31,8 @@ private:
         const float angle_increment = scan_msg->angle_increment;
 
         // Define bounding box dimensions in Cartesian coordinates
-        const float x_min = -0.65, x_max = 0.125;   // Forward-backward bounds
-        const float y_min = -0.29, y_max = 0.305; // Sideways bounds
+        const float x_min = -0.65, x_max = 0.13;   // Forward-backward bounds
+        const float y_min = -0.29, y_max = 0.33; // Sideways bounds
 
         int filtered_count = 0;  // To count the number of filtered points
 
