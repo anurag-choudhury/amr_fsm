@@ -18,9 +18,10 @@ amcl:
         laser_min_range: -1.0
         laser_model_type: "likelihood_field"
         max_beams: 60
-        max_particles: 2500
-        min_particles: 750
-        set_initial_pose: true
+        max_particles: 2000
+        min_particles: 500
+        set_initial_pose: 
+true
         initial_pose:
             x: 4.8
             y: -4.05
@@ -134,7 +135,7 @@ controller_server:
       min_vel_y: 0.0
       max_vel_x: 0.15
       max_vel_y: 0.0
-      max_vel_theta: 0.20
+      max_vel_theta: 0.25
       min_speed_xy: 0.0
       max_speed_xy: 0.16
       min_speed_theta: 0.0
@@ -195,8 +196,8 @@ local_costmap:
       plugins: ["voxel_layer", "inflation_layer"]
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
-        cost_scaling_factor: 2.5
-        inflation_radius: 0.4
+        cost_scaling_factor: 3.0
+        inflation_radius: 0.55
       voxel_layer:
         plugin: "nav2_costmap_2d::VoxelLayer"
         enabled: True
@@ -258,8 +259,8 @@ global_costmap:
         map_subscribe_transient_local: True
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
-        cost_scaling_factor: 2.5
-        inflation_radius: 0.4
+        cost_scaling_factor: 3.0
+        inflation_radius: 0.6
       always_send_full_costmap: True
   global_costmap_client:
     ros__parameters:
@@ -290,8 +291,8 @@ planner_server:
         planner_plugins: ["GridBased"]
         GridBased:
             plugin: "nav2_navfn_planner/NavfnPlanner"
-            tolerance: 0.3
-            use_astar: true
+            tolerance: 0.5
+            use_astar: false
             allow_unknown: true
 
 planner_server_rclcpp_node:
@@ -317,7 +318,7 @@ recoveries_server:
         simulate_ahead_time: 2.0
         max_rotational_vel: 0.5
         min_rotational_vel: 0.2
-        rotational_acc_lim: 0.8
+        rotational_acc_lim: 1.2
 
 robot_state_publisher:
     ros__parameters:
