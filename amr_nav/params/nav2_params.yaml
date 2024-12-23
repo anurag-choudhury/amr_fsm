@@ -196,7 +196,7 @@ local_costmap:
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
         cost_scaling_factor: 2.5
-        inflation_radius: 0.4
+        inflation_radius: 0.45
       voxel_layer:
         plugin: "nav2_costmap_2d::VoxelLayer"
         enabled: True
@@ -290,8 +290,8 @@ planner_server:
         planner_plugins: ["GridBased"]
         GridBased:
             plugin: "nav2_navfn_planner/NavfnPlanner"
-            tolerance: 0.3
-            use_astar: true
+            tolerance: 0.45
+            use_astar: false
             allow_unknown: true
 
 planner_server_rclcpp_node:
@@ -315,9 +315,9 @@ recoveries_server:
         transform_timeout: 0.1
         use_sim_time: false
         simulate_ahead_time: 2.0
-        max_rotational_vel: 0.5
-        min_rotational_vel: 0.2
-        rotational_acc_lim: 0.8
+        max_rotational_vel: 0.45
+        min_rotational_vel: 0.15
+        rotational_acc_lim: 0.4
 
 robot_state_publisher:
     ros__parameters:

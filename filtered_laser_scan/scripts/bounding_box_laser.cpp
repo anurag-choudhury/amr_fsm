@@ -34,25 +34,26 @@ private:
             }
 
             // // Left Front AMR (Angle range: [1.5, 2.23])
-            if (angle >= 1.1 && angle <= 1.4) {
+            if (angle >= 1.1 && angle <= 1.5) {
                 filtered_scan_msg.ranges[i] = std::numeric_limits<float>::quiet_NaN(); // Set to NaN to nullify
                 filtered_count++;
             }
 
             // // Back-left of AMR (Angle range: [-2.82, 2.82])
-            if (angle >= 2.62 && angle <= 2.82) {
+            //culprit
+            if (angle >= 2.6 && angle <= 2.85) {
                 filtered_scan_msg.ranges[i] = std::numeric_limits<float>::quiet_NaN(); // Set to NaN to nullify
                 filtered_count++;
             }
 
             // // right Back AMR (Angle range: [2.46, 2.67])
-            if (angle >= -2.82 && angle <= -2.67) {
+            if (angle >= -2.95 && angle <= -2.62) {
                 filtered_scan_msg.ranges[i] = std::numeric_limits<float>::quiet_NaN(); // Set to NaN to nullify
                 filtered_count++;
             }
 
             // // Right Back AMR (Angle range: [-2.44, -2.57])
-            if (angle >= 2.2 && angle <= 2.44) {
+            if (angle >= 2.2 && angle <= 2.5) {
                 filtered_scan_msg.ranges[i] = std::numeric_limits<float>::quiet_NaN(); // Set to NaN to nullify
                 filtered_count++;
             }
