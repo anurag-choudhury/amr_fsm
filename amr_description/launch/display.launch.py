@@ -33,10 +33,10 @@ def generate_launch_description():
         ),
         
         # Launch RViz
-        Node(
-            package='rviz2',
-            executable='rviz2',
-            name='rviz2',
-            arguments=['-d', rvizconfig],
-        ),
+        # Node(
+        #     package='rviz2',
+        #     executable='rviz2',
+        #     name='rviz2',
+        #     arguments=['-d', rvizconfig],
+        # ),
     ])
