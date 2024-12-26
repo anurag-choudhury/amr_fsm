@@ -288,7 +288,7 @@ void RoboteqDriver::cmdVelCallback(const geometry_msgs::msg::Twist::SharedPtr ms
     if (!closed_loop_) {
         // Calculate motor power in open-loop (scale 0-1000)
         float right_power = right_speed * 500.0 * 60.0 / (wheel_circumference_ * max_rpm_);
-        float left_power  = left_speed * 80.0 * 60.0 / (wheel_circumference_ * max_rpm_);
+        float left_power  = left_speed * 250.0 * 60.0 / (wheel_circumference_ * max_rpm_);
 
         RCLCPP_INFO(this->get_logger(), "[ROBOTEQ] left: %9d right: %9d", (int)left_power, (int)right_power);
 
@@ -312,11 +312,11 @@ void RoboteqDriver::cmdVelCallback(const geometry_msgs::msg::Twist::SharedPtr ms
         // For linear velocity (move forward/backward), command motor 1 (G1) and stop motor 2 (G2)
         if (msg->linear.x != 0) {
             cmd_str << "!G 1" << " " << left_rpm << "_";  // Command for motor 1 (linear velocity)
-            cmd_str << "!G 2" << " 0\r";  // Stop motor 2 (angular velocity set to 0)
+            // cmd_str << "!G 2" << " 0\r";  // Stop motor 2 (angular velocity set to 0)
         }
         // For angular velocity (turning), command motor 2 (G2) and stop motor 1 (G1)
         else if (msg->angular.z != 0) {
-            cmd_str << "!G 1" << " 0\r";  // Stop motor 1 (linear velocity set to 0)
+            // cmd_str << "!G 1" << " 0\r";  // Stop motor 1 (linear velocity set to 0)
             cmd_str << "!G 2" << " " << right_rpm << "_";  // Command for motor 2 (angular velocity)
         }
     }
@@ -398,7 +398,8 @@ void RoboteqDriver::queryCallback(){
 
         // Check if the fields vector has at least 2 elements
         if (fields.size() < 2) {
-            RCLCPP_ERROR_STREAM(this->get_logger(), tag << "Empty data:{" << result.data << "}");
+            
+            // RCLCPP_ERROR_STREAM(this->get_logger(), tag << "Empty data:{" << result.data << "}");
         } else {
             std::vector<std::string> fields_H;
             for (int i = fields.size() - 1; i >= 0; i--) {
