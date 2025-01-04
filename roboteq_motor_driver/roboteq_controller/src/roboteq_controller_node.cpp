@@ -237,8 +237,8 @@ void RoboteqDriver::cmdVelCallback(const geometry_msgs::msg::Twist::SharedPtr ms
         // Calculate motor power in open-loop (scale 0-1000)
         // float right_power = right_speed * 500.0 * 60.0 / (wheel_circumference_ * max_rpm_);
         // float left_power  = left_speed * 250.0 * 60.0 / (wheel_circumference_ * max_rpm_);
-        float angular_power= -msg->angular.z*200;
-        float linear_power= msg->linear.x*500;
+        float angular_power= -msg->angular.z*350;
+        float linear_power= msg->linear.x*700;
 
         RCLCPP_INFO(this->get_logger(), "[ROBOTEQ] linear: %9d angular: %9d", (int)linear_power, (int)angular_power);
         cmd_str << "!G 1" << " " << (int)linear_power << "_" << "!G 2" << " " << (int)angular_power << "_";
@@ -246,8 +246,8 @@ void RoboteqDriver::cmdVelCallback(const geometry_msgs::msg::Twist::SharedPtr ms
         // Calculate motor RPM in closed-loop (rpm)
         // int32_t right_rpm = - gear_reduction_ * right_speed * 60.0 / wheel_circumference_;
         // int32_t left_rpm  = gear_reduction_ * left_speed * 60.0 / wheel_circumference_;
-        float angular_power= -msg->angular.z*200;
-        float linear_power= msg->linear.x*500;
+        float angular_power= -msg->angular.z*350;
+        float linear_power= msg->linear.x*700;
 
         RCLCPP_INFO(this->get_logger(), "[ROBOTEQ] linear: %9d angular: %9d", (int)linear_power, (int)angular_power);
         cmd_str << "!G 1" << " " << (int)linear_power << "_" << "!G 2" << " " << (int)angular_power << "_";
