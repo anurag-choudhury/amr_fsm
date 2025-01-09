@@ -13,7 +13,7 @@ void RoboteqDriver::declare(){
 	declare_parameter("max_rpm", 0.0);
 	declare_parameter("gear_reduction", 0.0);
 	declare_parameter<int>("frequency", 0);
-	declare_parameter<std::string>("cmd_vel_topic", "cmd_vel");
+	declare_parameter<std::string>("cmd_vel_topic", "cmd_vel_safe");
 }
 
 void RoboteqDriver::init(){
@@ -92,7 +92,7 @@ RoboteqDriver::RoboteqDriver(const rclcpp::NodeOptions &options): Node("roboteq_
 	track_width_(0.),
 	max_rpm_(0.),
 	gear_reduction_(0.),
-	cmd_vel_topic_("cmd_vel"),
+	cmd_vel_topic_("cmd_vel_safe"),
 	frequency_(0){
 	
 	declare();

@@ -42,10 +42,16 @@ def generate_launch_description():
         executable='bounding_box_laser',
         name="filtered_laser_scan"
     )
+    obstacle_stop_node =Node(
+        package='amr_nav',
+        executable="obstacle_stop.py",
+        name="obstacle_stop_node"
+    )
 
     return LaunchDescription([
         roboteq_driver,
         lidar_driver,
         robot_description,
-        filtered_laser_scan
+        filtered_laser_scan,
+        obstacle_stop_node
     ])
