@@ -27,11 +27,11 @@ class DiffTf(Node):
         self.get_logger().info(f"-I- {self.nodename} started")
 
         #### parameters #######
-        self.rate_hz = self.declare_parameter("rate_hz", 10.0).value  # the rate at which to publish the transform
+        self.rate_hz = self.declare_parameter("rate_hz", 200.0).value  # the rate at which to publish the transform
         self.create_timer(1.0 / self.rate_hz, self.update)
 
         self.ticks_meter = float(
-            self.declare_parameter('ticks_meter', 560).value)  # The number of wheel encoder ticks per meter of travel
+            self.declare_parameter('ticks_meter', 563).value)  # The number of wheel encoder ticks per meter of travel
         self.base_width = float(self.declare_parameter('base_width', 0.57).value)  # The wheel base width in meters
 
         self.base_frame_id = self.declare_parameter('base_frame_id',

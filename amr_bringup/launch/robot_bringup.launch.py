@@ -24,7 +24,27 @@ def generate_launch_description():
         'launch',
         'display.launch.py'
     )
-
+    realsense_launch = os.path.join(
+        get_package_share_directory('realsense2_camera'),
+        'launch',
+        'rs_launch.py'
+    )
+    odom_ekf_filter_launch = os.path.join(
+        get_package_share_directory('amr_nav'),
+        "launch","odom_filter.launch.py"
+    )
+    realsense_camera = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(realsense_launch),
+        launch_arguments={
+            'enable_depth': 'false',
+            'enable_color': 'false',
+            'enable_infra1': 'false',
+            'enable_infra2': 'false',
+            'enable_gyro': 'true',
+            'enable_accel': 'true',
+            'unite_imu_method': '1'
+        }.items()
+    )
     # Include individual launch files
     roboteq_driver = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(roboteq_driver_launch)
@@ -37,6 +57,9 @@ def generate_launch_description():
     robot_description = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(robot_description_launch)
     )
+    odom_fused = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(odom_ekf_filter_launch)
+    )
     filtered_laser_scan = Node(
         package='filtered_laser_scan',
         executable='bounding_box_laser',
@@ -47,11 +70,14 @@ def generate_launch_description():
         executable="obstacle_stop.py",
         name="obstacle_stop_node"
     )
+    
 
     return LaunchDescription([
         roboteq_driver,
         lidar_driver,
         robot_description,
         filtered_laser_scan,
-        obstacle_stop_node
+        obstacle_stop_node,
+        realsense_camera,
+        odom_fused
     ])

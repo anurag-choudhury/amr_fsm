@@ -40,31 +40,28 @@ class DirectionalSafetyNode(Node):
             ]
             self.get_logger().info(f"Obstacle Detected -> {' | '.join(obstacle_info)}")
     def cmd_vel_callback(self, msg):
-        """Override velocity commands with safety checks for better obstacle handling."""
+        """Override velocity commands with safety checks for immediate halting."""
         safe_twist = Twist()
 
-        # Control forward and backward movement
-        if msg.linear.x > 0.0 and not self.obstacle_detected['front']:
-            safe_twist.linear.x = msg.linear.x
-        elif msg.linear.x < 0.0 and not self.obstacle_detected['back']:
-            safe_twist.linear.x = msg.linear.x
+        # Immediate stop if there is an obstacle in the current movement direction
+        if msg.linear.x > 0.0 and self.obstacle_detected['front']:
+            safe_twist.linear.x = 0.0  # Stop forward movement
+        elif msg.linear.x < 0.0 and self.obstacle_detected['back']:
+            safe_twist.linear.x = 0.0  # Stop backward movement
         else:
-            safe_twist.linear.x = 0.0  # Stop if there's an obstacle
+            safe_twist.linear.x = msg.linear.x  # Allow safe linear movement
 
-        # Improved rotation handling based on left and right obstacles
-        if msg.angular.z > 0.0:  # Turning left
-            if not self.obstacle_detected['left']:
-                safe_twist.angular.z = msg.angular.z  # Allow left turn if left is clear
-            else:
-                safe_twist.angular.z = 0.0  # Stop left turn if left is blocked
-        elif msg.angular.z < 0.0:  # Turning right
-            if not self.obstacle_detected['right']:
-                safe_twist.angular.z = msg.angular.z  # Allow right turn if right is clear
-            else:
-                safe_twist.angular.z = 0.0  # Stop right turn if right is blocked
+        # Handle angular movement for left and right turns
+        if msg.angular.z > 0.0 and self.obstacle_detected['left']:
+            safe_twist.angular.z = 0.0  # Stop left turn
+        elif msg.angular.z < 0.0 and self.obstacle_detected['right']:
+            safe_twist.angular.z = 0.0  # Stop right turn
+        else:
+            safe_twist.angular.z = msg.angular.z  # Allow safe angular movement
 
-        # Publish the adjusted Twist command
+        # Publish the adjusted Twist command to immediately reflect obstacle avoidance
         self.cmd_vel_publisher.publish(safe_twist)
+
 
 
 def main(args=None):

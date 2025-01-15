@@ -58,7 +58,7 @@ bt_navigator:
         use_sim_time: false
         global_frame: map
         robot_base_frame: base_link
-        odom_topic: /roboteq/odom
+        odom_topic: /odometry/filtered
         default_bt_xml_filename: "navigate_w_replanning_and_recovery.xml"
         bt_loop_duration: 10
         default_server_timeout: 20
@@ -133,7 +133,7 @@ controller_server:
     min_y_velocity_threshold: 0.5
     min_theta_velocity_threshold: 0.001
     failure_tolerance: 0.3
-    odom_topic : "/roboteq/odom"
+    odom_topic : "/odometry/filtered"
     progress_checker_plugin: "progress_checker"
     goal_checker_plugins: ["general_goal_checker"] # "precise_goal_checker"
     controller_plugins: ["FollowPath"]

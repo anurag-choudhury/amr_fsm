@@ -59,6 +59,7 @@ RUN apt-get install -y --no-install-recommends \
     ros-${ROS_DISTRO}-xacro \
     ros-${ROS_DISTRO}-turtlebot3* \
     ros-${ROS_DISTRO}-teleop-twist-keyboard \
+    ros-${ROS_DISTRO}-realsense* \
     net-tools \
     iputils-ping \
     && rm -rf /var/lib/apt/lists/*

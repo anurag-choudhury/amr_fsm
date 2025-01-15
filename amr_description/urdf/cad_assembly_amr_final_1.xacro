@@ -665,7 +665,7 @@
 <!--  -->
 
 <link
-    name="depth_camera">
+    name="camera_imu_optical_frame">
     
     <visual>
       <origin
@@ -675,7 +675,7 @@
     
   </link>
   <joint
-    name="depth_camera_joint"
+    name="camera_imu_optical_frame_joint"
     type="fixed">
     <origin
       xyz="0.26 -0.03 0.178"
@@ -683,7 +683,7 @@
     <parent
       link="base_link" />
     <child
-      link="depth_camera" />
+      link="camera_imu_optical_frame" />
     <axis
       xyz="0 0 0" />
   </joint>
