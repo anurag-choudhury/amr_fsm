@@ -6,10 +6,9 @@ image_name="amr-ros2-humble"
 
 # Start the container with a long-running process (e.g., bash shell or ros2 node launcher)
 docker run -d \
-    --runtime=nvidia \
-    --gpus all \
     --network=host \
     -e DISPLAY=$DISPLAY \
+    -e FASTRTPS_DEFAULT_PROFILES_FILE="./src/super_client_configuration_file.xml" \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
     -v $PWD/../:/workspaces/amr_ws \
     -v /etc/localtime:/etc/localtime:ro \

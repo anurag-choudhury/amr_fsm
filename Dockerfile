@@ -1,5 +1,6 @@
 # Use official Ubuntu 22.04 aarch64 image as the base
-FROM arm64v8/ubuntu:22.04
+FROM ubuntu:22.04
+#FROM arm64v8/ubuntu:22.04
 
 # Set environment variables
 ENV DEBIAN_FRONTEND=noninteractive \
@@ -15,7 +16,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     apt-utils \
     git \
-    usbutils \
     software-properties-common \
     python3-pip \
     nano \
@@ -23,10 +23,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     wget \
     sudo \
     locales \
-    libcurlpp-dev \
-    nvidia-cuda-toolkit \
     && rm -rf /var/lib/apt/lists/*
-
 
 # # Add the ROS 2 repository and keys
 # RUN curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | apt-key add - && \
