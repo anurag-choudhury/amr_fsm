@@ -1,6 +1,6 @@
-k<dds>
+<dds>
     <profiles xmlns="http://www.eprosima.com/XMLSchemas/fastRTPS_Profiles">
-  <data_writer profile_name="data_writer_profile" is_default_profile="true">
+    <data_writer profile_name="data_writer_profile" is_default_profile="true">
     <historyMemoryPolicy>PREALLOCATED_WITH_REALLOC</historyMemoryPolicy>
     <qos>
       <publishMode>
@@ -22,27 +22,47 @@ k<dds>
     <transport_descriptor>
       <transport_id>udp_transport</transport_id>
       <type>UDPv4</type>
-      <maxMessageSize>1400</maxMessageSize>
     </transport_descriptor>
-  </transport_descriptors>       
- <participant profile_name="super_client_profile" is_default_profile="true">
+    <transport_descriptor>
+      <transport_id>TCp</transport_id>
+      <type>TCPv4</type>
+    </transport_descriptor>
+  </transport_descriptors>
+   
+     <participant profile_name="super_client_profile" is_default_profile="true">
             <rtps>
+                
+                <useBuiltinTransports>false</useBuiltinTransports>
+                    <userTransports>
+                        <transport_id>shm_transport</transport_id>
+                        <transport_id>udp_transport</transport_id>
+                    </userTransports>
                 <sendSocketBufferSize>212992</sendSocketBufferSize>
                 <listenSocketBufferSize>212992</listenSocketBufferSize>
                 <builtin>
                     <discovery_config>
                         <discoveryProtocol>SUPER_CLIENT</discoveryProtocol>
                         <discoveryServersList>
-                            <RemoteServer prefix="44.53.00.5f.45.50.52.4f.53.49.4d.41">
+				        <!-- <RemoteServer prefix="44.53.01.5f.45.50.52.4f.53.49.4d.41">
                                 <metatrafficUnicastLocatorList>
                                     <locator>
                                         <udpv4>
-                                            <address>172.28.168.227</address>
+                                            <address>127.0.0.1</address>
+                                            <port>11812</port>
+                                        </udpv4>
+                                    </locator>
+                                </metatrafficUnicastLocatorList>
+                            </RemoteServer> -->
+                        <RemoteServer prefix="44.53.00.5f.45.50.52.4f.53.49.4d.41">
+                                <metatrafficUnicastLocatorList>
+                                    <locator>
+                                        <udpv4>
+                                            <address>10.100.50.227</address>
                                             <port>11811</port>
                                         </udpv4>
                                     </locator>
                                 </metatrafficUnicastLocatorList>
-                            </RemoteServer>
+                            </RemoteServer> 
                         </discoveryServersList>
                     </discovery_config>
                 </builtin>
@@ -50,3 +70,4 @@ k<dds>
         </participant>
     </profiles>
 </dds>
+

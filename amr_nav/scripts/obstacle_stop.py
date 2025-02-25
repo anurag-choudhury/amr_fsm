@@ -24,7 +24,11 @@ class DirectionalSafetyNode(Node):
         back_min = min(ranges[0:int(num_ranges * 30 / 360)] + ranges[-int(num_ranges * 30 / 360):])
         right_min = min(ranges[int(num_ranges * 60 / 360):int(num_ranges * 120 / 360)])
         left_min = min(ranges[int(num_ranges * 240 / 360):int(num_ranges * 300 / 360)])
-        front_min = min(ranges[int(num_ranges * 150 / 360):int(num_ranges * 210 / 360)])
+        front_min = min(ranges[int(num_ranges * 140 / 360):int(num_ranges * 235 / 360)])
+        # back_min = min(ranges[0:int(num_ranges * 30 / 360)] + ranges[-int(num_ranges * 30 / 360):])
+        # right_min = min(ranges[int(num_ranges * 60 / 360):int(num_ranges * 120 / 360)])
+        # left_min = min(ranges[int(num_ranges * 240 / 360):int(num_ranges * 300 / 360)])
+        # front_min = min(ranges[int(num_ranges * 150 / 360):int(num_ranges * 210 / 360)])
 
         self.obstacle_detected['front'] = front_min < self.safe_distances['front']
         self.obstacle_detected['left'] = left_min < self.safe_distances['left']

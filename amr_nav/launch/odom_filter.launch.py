@@ -13,6 +13,9 @@ def generate_launch_description():
             executable='ekf_node',
             name='ekf_filter_node',
             output='screen',
-            parameters=[ekf_param_file]
+            parameters=[ekf_param_file],
+            remappings=[
+                ('/odometry/filtered', '/odom')  # Change topic name
+            ]
         ),
     ])

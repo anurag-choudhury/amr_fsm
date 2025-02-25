@@ -8,7 +8,6 @@ image_name="amr-ros2-humble"
 docker run -d \
     --network=host \
     -e DISPLAY=$DISPLAY \
-    -e FASTRTPS_DEFAULT_PROFILES_FILE="./src/super_client_configuration_file.xml" \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
     -v $PWD/../:/workspaces/amr_ws \
     -v /etc/localtime:/etc/localtime:ro \
@@ -16,7 +15,7 @@ docker run -d \
     --name "$container_name" \
     --workdir /workspaces/amr_ws \
     "$image_name" bash -c "source /opt/ros/humble/setup.bash && tail -f /dev/null"  # Keeps container alive with a dummy process
-
+# -e FASTRTPS_DEFAULT_PROFILES_FILE="./src/super_client_configuration_file.xml" 
 # Ensure the container is running
 echo "Waiting for container $container_name to start..."
 while ! docker ps --filter "name=$container_name" | grep -q $container_name; do

@@ -78,6 +78,6 @@ def generate_launch_description():
         robot_description,
         filtered_laser_scan,
         obstacle_stop_node,
-        realsense_camera,
+        # realsense_camera,
         odom_fused
     ])
