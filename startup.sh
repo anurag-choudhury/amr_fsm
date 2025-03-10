@@ -32,13 +32,13 @@ docker exec $container_name bash -c "source /opt/ros/humble/setup.bash && source
 ROBOT_PID=$!
 
 # Launch the navigation
-docker exec $container_name bash -c "source /opt/ros/humble/setup.bash && source /workspaces/amr_ws/install/setup.bash && ros2 launch amr_nav navigation.launch.py" || { echo "Failed to launch navigation"; exit 1; } &
-NAV_PID=$!
+# docker exec $container_name bash -c "source /opt/ros/humble/setup.bash && source /workspaces/amr_ws/install/setup.bash && ros2 launch amr_nav navigation.launch.py" || { echo "Failed to launch navigation"; exit 1; } &
+# NAV_PID=$!
 
 # Wait for both tasks to complete
 # This allows you to gracefully exit the script, but also ensures the processes are monitored
 wait $ROBOT_PID
-wait $NAV_PID
+# wait $NAV_PID
 
 echo "Both tasks completed successfully!"
 

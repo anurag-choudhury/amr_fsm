@@ -57,7 +57,9 @@ RUN apt-get install -y --no-install-recommends \
     ros-${ROS_DISTRO}-turtlebot3* \
     ros-${ROS_DISTRO}-teleop-twist-keyboard \
     ros-${ROS_DISTRO}-realsense* \
+    ros-${ROS_DISTRO}-rosbridge-server* \
     net-tools \
+    psmisc \
     iputils-ping \
     && rm -rf /var/lib/apt/lists/*
 RUN apt-get update
@@ -66,6 +68,7 @@ RUN apt-get update
 RUN pip3 install --no-cache-dir \
     numpy \
     scipy \
+    flask \
     matplotlib
 
 # Set up workspace directory

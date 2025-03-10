@@ -33,6 +33,10 @@ def generate_launch_description():
         get_package_share_directory('amr_nav'),
         "launch","odom_filter.launch.py"
     )
+    ui_launch_file= os.path.join(
+        get_package_share_directory('ui_package'),
+        "launch","ui.launch.py"
+    )
     realsense_camera = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(realsense_launch),
         launch_arguments={
@@ -70,6 +74,9 @@ def generate_launch_description():
         executable="obstacle_stop.py",
         name="obstacle_stop_node"
     )
+    ui_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(ui_launch_file)
+    )
     
 
     return LaunchDescription([
@@ -79,5 +86,6 @@ def generate_launch_description():
         filtered_laser_scan,
         obstacle_stop_node,
         # realsense_camera,
-        odom_fused
+        odom_fused,
+        ui_launch
     ])

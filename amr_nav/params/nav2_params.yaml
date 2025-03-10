@@ -20,7 +20,9 @@ amcl:
         max_beams: 60
         max_particles: 2500
         min_particles: 750
-        set_initial_pose: true
+        set_initial_pose: True
+        always_reset_initial_pose: False
+        first_map_only: False
         initial_pose:
             x: 4.8
             y: -4.05

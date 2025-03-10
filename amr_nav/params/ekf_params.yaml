@@ -1,6 +1,6 @@
 ekf_filter_node:
   ros__parameters:
-    frequency: 100.0
+    frequency: 50.0
 
     sensor_timeout: 0.0
 
@@ -40,7 +40,7 @@ ekf_filter_node:
     # ekf_localization_node and ukf_localization_node are not concerned with the earth frame.
     # Here is how to use the following settings:
     # 1. Set the map_frame, odom_frame, and base_link frames to the appropriate frame names for your system.
-    #     1a. If your system does not have a map_frame, just remove it, and make sure "world_frame" is set to the value of
+    #     1a. If your system doeslam_toolbox online_async_launch.pys not have a map_frame, just remove it, and make sure "world_frame" is set to the value of
     #         odom_frame.
     # 2. If you are fusing continuous position data such as wheel encoder odometry, visual odometry, or IMU data, set
     #   "world_frame" to your odom_frame value. This is the default behavior for robot_localization's state estimation nodes.
@@ -107,7 +107,8 @@ ekf_filter_node:
     # the thresholds.
     odom0_pose_rejection_threshold: 5.0
     odom0_twist_rejection_threshold: 1.0
-    odom0_covariance: [0.05, 0.0, 0.0, 0.0, 0.05, 0.0, 0.0, 0.0, 0.2]
+    # odom0_covariance: [0.05, 0.0, 0.0, 0.0, 0.05, 0.0, 0.0, 0.0, 0.2]
+    odom0_covariance: [0.1, 0.0, 0.0, 0.0, 0.1, 0.0, 0.0, 0.0, 0.3]
     # values is x, y, z, roll, pitch, yaw, vx, vy, vz, vroll, vpitch, vyaw, ax, ay, az
     # Use this to set which sensors to fuse
     imu0: /camera/camera/imu                    #-----------------------------------------
@@ -125,7 +126,9 @@ ekf_filter_node:
     imu0_twist_rejection_threshold: 0.8                #
     imu0_linear_acceleration_rejection_threshold: 0.8  #
 
-    imu0_covariance: [0.1, 0.0, 0.0, 0.0, 0.1, 0.0, 0.0, 0.0, 0.02]
+    # imu0_covariance: [0.1, 0.0, 0.0, 0.0, 0.1, 0.0, 0.0, 0.0, 0.02]
+    imu0_covariance: [0.2, 0.0, 0.0, 0.0, 0.2, 0.0, 0.0, 0.0, 0.1]
+
 
 
     # # [ADVANCED] Some IMUs automatically remove acceleration due to gravity, and others don't. If yours doesn't, please set
