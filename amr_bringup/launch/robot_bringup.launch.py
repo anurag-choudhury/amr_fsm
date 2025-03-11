@@ -37,6 +37,10 @@ def generate_launch_description():
         get_package_share_directory('ui_package'),
         "launch","ui.launch.py"
     )
+    nav_launch_file= os.path.join(
+        get_package_share_directory("amr_nav"),
+        "launch","navigation.launch.py"
+    )
     realsense_camera = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(realsense_launch),
         launch_arguments={
@@ -64,6 +68,10 @@ def generate_launch_description():
     odom_fused = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(odom_ekf_filter_launch)
     )
+    nav_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(nav_launch_file)
+    )
+    
     filtered_laser_scan = Node(
         package='filtered_laser_scan',
         executable='bounding_box_laser',
@@ -87,5 +95,6 @@ def generate_launch_description():
         obstacle_stop_node,
         # realsense_camera,
         odom_fused,
-        ui_launch
+        #ui_launch,
+        nav_launch
     ])

@@ -15,6 +15,7 @@ docker run -d \
     --name "$container_name" \
     --workdir /workspaces/amr_ws \
     "$image_name" bash -c "source /opt/ros/humble/setup.bash && tail -f /dev/null"  # Keeps container alive with a dummy process
+    -e CYCLONEDDS_URI="./src/cyclonedds_config.xml"
 # -e FASTRTPS_DEFAULT_PROFILES_FILE="./src/super_client_configuration_file.xml" 
 # Ensure the container is running
 echo "Waiting for container $container_name to start..."

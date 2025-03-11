@@ -157,19 +157,19 @@ controller_server:
       debug_trajectory_details: True
       min_vel_x: 0.0
       min_vel_y: 0.0
-      max_vel_x: 0.26
+      max_vel_x: 0.32
       max_vel_y: 0.0
-      max_vel_theta: 0.38
+      max_vel_theta: 0.6
       min_speed_xy: 0.0
-      max_speed_xy: 0.26
+      max_speed_xy: 0.36
       min_speed_theta: 0.0
 
-      acc_lim_x: 1.8
+      acc_lim_x: 1.6
       acc_lim_y: 0.0
       acc_lim_theta: 2.2
-      decel_lim_x: -1.8
+      decel_lim_x: -1.6
       decel_lim_y: 0.0
-      decel_lim_theta: -2.2 
+      decel_lim_theta: -2.2
 
       vx_samples: 20
       vy_samples: 5
@@ -371,9 +371,9 @@ recoveries_server:
         transform_timeout: 0.1
         use_sim_time: false
         simulate_ahead_time: 2.0
-        max_rotational_vel: 0.35
+        max_rotational_vel: 0.30
         min_rotational_vel: 0.15
-        rotational_acc_lim: 0.35
+        rotational_acc_lim: 0.30
 
 robot_state_publisher:
     ros__parameters:

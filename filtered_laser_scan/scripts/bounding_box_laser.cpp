@@ -59,7 +59,7 @@ private:
             }
 
             // // Right Front AMR (Angle range: [-2.2, -1.43])
-            if (angle >= -2.44 && angle <= -2.2) {
+            if (angle >= -2.55 && angle <= -2.2) {
                 filtered_scan_msg.ranges[i] = std::numeric_limits<float>::quiet_NaN(); // Set to NaN to nullify
                 filtered_count++;
             }
